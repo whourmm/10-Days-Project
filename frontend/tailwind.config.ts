@@ -12,6 +12,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      aspectRatio: {
+        "tarot-card": "7/12",
+      },
     },
   },
   plugins: [],
