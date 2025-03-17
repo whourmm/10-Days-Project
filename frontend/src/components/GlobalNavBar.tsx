@@ -8,6 +8,7 @@ import flower from "@public/images/navbar/flower.svg";
 import flower_click from "@public/images/navbar/flower_click.svg";
 import bee from "@public/images/navbar/bee.svg";
 import bee_click from "@public/images/navbar/bee_click.svg";
+import { useRouter } from "next/navigation";
 
 // Define types for the icon and position data
 interface Icon {
@@ -23,6 +24,7 @@ interface Position {
 }
 
 export default function GlobalNavBar() {
+  const router = useRouter();
   const [activeIcon, setActiveIcon] = useState<number>(0); // Active icon index
   const [showClickedIcon, setShowClickedIcon] = useState<boolean>(true); // Control visibility of clicked icon
   const navRef = useRef<HTMLDivElement | null>(null); // Ref for the navigation container
@@ -32,9 +34,9 @@ export default function GlobalNavBar() {
 
   // Example icons - replace with your actual icons
   const icons: Icon[] = [
-    { src: card, src_click: card_click, alt: "Cards", path: "homepage/daily-tarot" },
-    { src: flower, src_click: flower_click, alt: "flower", path: "homepage/community" },
-    { src: bee, src_click: bee_click, alt: "bee", path: "homepage/history" },
+    { src: card, src_click: card_click, alt: "Cards", path: "daily-tarot" },
+    { src: flower, src_click: flower_click, alt: "flower", path: "community" },
+    { src: bee, src_click: bee_click, alt: "bee", path: "history" },
   ];
 
   // Calculate positions on initial render
@@ -136,7 +138,10 @@ export default function GlobalNavBar() {
           <button
             key={index}
             className="nav-icon relative w-12 h-10 rounded-full flex items-center justify-center z-0 relative"
-            onClick={() => setActiveIcon(index)}
+            onClick={() => {
+              setActiveIcon(index);
+              router.push(`${icon.path}`);
+            }}
           >
             {index !== activeIcon && (
               <Image
