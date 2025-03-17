@@ -23,7 +23,7 @@ interface Position {
   top: number;
 }
 
-export default function GlobalNavBar() {
+export default function GlobalNavbar() {
   const router = useRouter();
   const [activeIcon, setActiveIcon] = useState<number>(0); // Active icon index
   const [showClickedIcon, setShowClickedIcon] = useState<boolean>(true); // Control visibility of clicked icon

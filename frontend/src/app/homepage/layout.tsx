@@ -1,4 +1,4 @@
-import GlobalNavBar from "@/components/GlobalNavBar";
+import GlobalNavBar from "@/components/global_nav_bar";
 
 export default function Layout({
   children,
