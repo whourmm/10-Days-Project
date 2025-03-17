@@ -14,6 +14,7 @@ interface Icon {
   src: string;
   src_click: string;
   alt: string;
+  path: string;
 }
 
 interface Position {
@@ -31,9 +32,9 @@ export default function GlobalNavBar() {
 
   // Example icons - replace with your actual icons
   const icons: Icon[] = [
-    { src: card, src_click: card_click, alt: "Cards" },
-    { src: flower, src_click: flower_click, alt: "flower" },
-    { src: bee, src_click: bee_click, alt: "bee" },
+    { src: card, src_click: card_click, alt: "Cards", path: "homepage/daily-tarot" },
+    { src: flower, src_click: flower_click, alt: "flower", path: "homepage/community" },
+    { src: bee, src_click: bee_click, alt: "bee", path: "homepage/history" },
   ];
 
   // Calculate positions on initial render
@@ -68,14 +69,23 @@ export default function GlobalNavBar() {
     }
   }, [activeIcon, positions, initialRender]);
 
-  // Handle window resize
+  // Calculate positions whenever window resizes
   useEffect(() => {
     const handleResize = () => {
-      calculatePositions();
+      // Use timeout to debounce resize events
+      setTimeout(() => {
+        calculatePositions();
+      }, 100);
     };
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    // Also recalculate on orientation change for mobile devices
+    window.addEventListener("orientationchange", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
+    };
   }, []);
 
   // Calculate positions of all icons
@@ -102,10 +112,9 @@ export default function GlobalNavBar() {
   return (
     <div className="relative bg-[#2E2E2E] p-4" ref={navRef}>
       {/* Active indicator */}
-
       <div
         ref={indicatorRef}
-        className="absolute top-[-7vh] left-[-0.5vh]  border-solid w-[11vh] h-[15vh] z-0"
+        className="absolute w-[11vh] h-[15vh] z-0 transform-gpu"
         style={{
           transform: positions[activeIcon]
             ? `translate(${positions[activeIcon].left}px, ${positions[activeIcon].top}px)`
@@ -113,35 +122,47 @@ export default function GlobalNavBar() {
           transition: initialRender ? "none" : "transform 0.3s cubic-bezier(0.34, 1, 0, 1)",
           opacity: positions.length > 0 ? 1 : 0,
           backgroundImage: "url('/images/navbar/circle_bee.svg')",
-          backgroundSize: "cover",
+          backgroundSize: "contain", // Use contain to ensure the entire image is visible
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          // Remove the negative translations that might be causing clipping
-
-          // Add a transform-origin to ensure it rotates from center
-          //   transformOrigin: "center",
-          // Add a margin to ensure it's visible
-          margin: "-5vh",
+          marginLeft: "-7.5vh", // Half of width
+          marginTop: "-14.5vh", // Adjusted to position the circle properly
         }}
       />
 
       {/* Navigation icons */}
-      <div className="items-center flex justify-around z-0 ">
+      <div className="items-center flex justify-around z-0">
         {icons.map((icon, index) => (
           <button
             key={index}
-            className="nav-icon relative w-12 h-10 rounded-full flex items-center justify-center z-0  relative"
+            className="nav-icon relative w-12 h-10 rounded-full flex items-center justify-center z-0 relative"
             onClick={() => setActiveIcon(index)}
           >
             {index !== activeIcon && (
-              <Image src={icon.src} alt={icon.alt} width={60} height={60} className="" />
+              <Image
+                src={icon.src}
+                alt={icon.alt}
+                width={60}
+                height={60}
+                className="w-10 h-10 md:w-12 md:h-12"
+              />
             )}
 
-            {index === activeIcon && (
+            {index === activeIcon && showClickedIcon && (
               <div
-                className="absolute -top-10 whitespace-nowrap text-black text-xs px-1 py-1 rounded-full z-20 w-[12vh] h-[12vh] flex justify-center"
+                className="absolute z-20"
                 style={{
                   animation: "fadeIn 0.2s ease-out",
+                  position: "absolute",
+                  // The key change: position relative to the background circle
+                  top: "-11.5vh", // Match the indicator's marginTop
+                  left: "0",
+                  width: "11vh", // Match indicator width
+                  height: "15vh", // Match indicator height
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  transform: "translateX(-5.5vh)", // Center horizontally (match marginLeft)
                 }}
               >
                 <Image
@@ -150,6 +171,12 @@ export default function GlobalNavBar() {
                   width={50}
                   height={50}
                   className="z-10"
+                  style={{
+                    position: "absolute",
+                    top: "50%", // Center in the circle
+                    left: "33%", // Center in the circle
+                    transform: "translate(20%, 0%)", // The -62% vertically centers the icon in the visual center of the background
+                  }}
                 />
               </div>
             )}
@@ -162,11 +189,16 @@ export default function GlobalNavBar() {
         @keyframes fadeIn {
           from {
             opacity: 0;
-            transform: translateY(10px);
           }
           to {
             opacity: 1;
-            transform: translateY(0);
+          }
+        }
+
+        @media (max-width: 640px) {
+          .nav-icon {
+            width: 40px;
+            height: 36px;
           }
         }
       `}</style>
