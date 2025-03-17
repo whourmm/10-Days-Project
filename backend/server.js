@@ -2,10 +2,11 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const pool = require("./src/config/db");
 
 // Load environment variables
 dotenv.config();
+
+const supabase = require("./src/config/db");
 
 // Initialize Express app
 const app = express();
@@ -20,17 +21,19 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-// Sample db pool connection
+// Sample API query
 async function getBlogs() {
   try {
-    const result = await pool.query("SELECT * FROM blogs");
-    console.log(result.rows);
+    let { data: users, error } = await supabase
+    .from('users')
+    .select('*')
+    return users
   } catch (error) {
-    console.error("DB error: " + error.message);
+    console.log(error)
   }
 }
 
-getBlogs();
+getBlogs().then((blogs) => {console.log(blogs)})
 
 // Start the server
 app.listen(PORT, () => {
