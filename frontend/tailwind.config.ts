@@ -8,9 +8,23 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        athiti: ["Athiti", "sans-serif"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "custom-white": "#ECECEC",
+      },
+      backgroundImage: {
+        'main-background': "url('/images/BackGround.svg')",
+        'logo': "url('/images/Logo.svg')",
+        'icon-background' : "url('url('/images/navbar/circle_bee.svg')')",
+
+      },
+      fontSize: {
+        'xxs': '0.65rem', // Extra small font size
+        'xxl': '1.75rem',
       },
     },
   },
