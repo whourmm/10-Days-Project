@@ -26,6 +26,9 @@ const config: Config = {
         'xxs': '0.65rem', // Extra small font size
         'xxl': '1.75rem',
       },
+      aspectRatio: {
+        "tarot-card": "7/12",
+      },
     },
   },
   plugins: [],
