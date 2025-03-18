@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Athiti } from "@next/font/google";
 import "./globals.css";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+// import { authOptions } from "./api/auth/[...nextauth]/route";
 import NextAuthProvider from "./providers/NextAuthProvider";
 
 const athiti = Athiti({
@@ -20,12 +20,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const nextAuthSession = await getServerSession(authOptions);
+  // const nextAuthSession = await getServerSession(authOptions);
   return (
     <html lang="th">
-      <NextAuthProvider session={nextAuthSession}>
-        <body className={` bg-main-background ${athiti.className}`}>{children}</body>
-      </NextAuthProvider>
+      {/* <NextAuthProvider session={nextAuthSession}> */}
+      <body className={` bg-main-background ${athiti.className}`}>{children}</body>
+      {/* </NextAuthProvider> */}
     </html>
   );
 }
