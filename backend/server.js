@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.json()); // Parse JSON requests
 app.use(cors()); // Enable CORS
+const tarotRoutes = require('./src/routes/tarotRoutes');
+app.use('/tarot', tarotRoutes);
 
 // Sample route
 app.get("/", (req, res) => {
