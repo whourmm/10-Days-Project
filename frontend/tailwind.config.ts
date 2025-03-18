@@ -20,7 +20,7 @@ const config: Config = {
     },
       fontFamily: {
         athiti: ["Athiti", "sans-serif"],
-        "frederick": ["Fredericka the Great", "cursive"],
+        "fredericka-the-great": ["Fredericka the Great", "cursive"],
       },
       colors: {
         background: "var(--background)",
