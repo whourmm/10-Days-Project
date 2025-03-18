@@ -1,21 +1,20 @@
 //10-Days-Project\backend\src\routes\userRoutes.js
 const express = require('express');
-const userController = require('../controllers/userController'); // Import controller
+const { createUser, getUsers, getUserById, updateUser, deleteUser } = require('../controllers/userController'); // Import controller
 const router = express.Router({ mergeParams: true });
 
-// CREATE User
-router.post('/', userController.createUser);
+router.post('/', createUser);
 
-// READ all Users
-router.get('/', userController.getUsers);
+// Get all users
+router.get('/', getUsers);
 
 // READ User by ID
-router.get('/:id', userController.getUserById);
+router.get('/:id', getUserById);
 
 // UPDATE User
-router.put('/:id', userController.updateUser);
+router.put('/:id', updateUser);
 
 // DELETE User
-router.delete('/:id', userController.deleteUser);
+router.delete('/:id', deleteUser);
 
 module.exports = router;
