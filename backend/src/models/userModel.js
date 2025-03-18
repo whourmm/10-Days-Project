@@ -19,7 +19,7 @@ const createUser = async (username, email, password) => {
       // Insert user profile data into users table with the hashed password
       const { data, insertError } = await supabase
         .from('users')
-        .insert([{ id: user.id, username:username, email:email, password: hashedPassword }]);
+        .insert([{username:username, email:email, password: hashedPassword }]);
     
       if (insertError) {
         throw new Error('Error inserting user profile data: ' + insertError.message);

@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 dotenv.config();
 
 const supabase = require("./src/config/db");
+const userRoutes = require('./src/routes/userRoutes')
 
 // Initialize Express app
 const app = express();
@@ -22,6 +23,8 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
+app.use('/api/users', userRoutes);
+
 
 // Sample API query
 async function getBlogs() {
