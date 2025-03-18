@@ -47,9 +47,18 @@ const config: Config = {
         'xxl': '1.75rem',
         'md' : '1.40rem',
         'tag' : '1.2rem',
+        'header' : '2.5rem',
       },
       aspectRatio: {
         "tarot-card": "7/12",
+      },
+      lineHeight: {
+        // Custom line height values
+        'extra-tight': '1.1',
+        'tight': '1.25',
+        'normal': '1.5',
+        'loose': '1.75',
+        'extra-loose': '2',
       },
     },
   },
