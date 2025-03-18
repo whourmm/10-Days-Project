@@ -20,6 +20,7 @@ const config: Config = {
     },
       fontFamily: {
         athiti: ["Athiti", "sans-serif"],
+        "frederick": ["Fredericka the Great", "cursive"],
       },
       colors: {
         background: "var(--background)",
@@ -40,7 +41,6 @@ const config: Config = {
         'main-background': "url('/images/BackGround.svg')",
         'logo': "url('/images/Logo.svg')",
         'icon-background' : "url('url('/images/navbar/circle_bee.svg')')",
-
       },
       fontSize: {
         'xxs': '0.65rem', // Extra small font size
