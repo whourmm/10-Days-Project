@@ -1,5 +1,5 @@
-import GlobalNavBar from "@/components/global_nav_bar";
-import { Athiti } from "@next/font/google";
+import GlobalNavBar from "@/components/navbar/global_nav_bar";
+import { Athiti } from "next/font/google";
 
 const athiti = Athiti({
   subsets: ["thai", "latin"],
@@ -13,7 +13,7 @@ export default function Layout({
 }>) {
   return (
     <html lang="th">
-      <div className="z-50 w-full fixed bottom-0">
+      <div className="bottom-0 z-50 fixed w-full">
         <GlobalNavBar />
       </div>
       <body className={`bg-main-background ${athiti.className}`}>{children}</body>
