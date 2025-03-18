@@ -43,12 +43,13 @@ export default function RegisterPage() {
         return;
       }
 
-      const postRegister = async () => {
-        await register(name, email, password);
-      };
-      postRegister();
+      // const postRegister = async () => {
+      //   await register(name, email, password);
+      // };
+      // postRegister();
       alert("Successfully registered!");
-      router.push("/api/auth/signIn");
+      // router.push("/api/auth/signin");
+      router.push("/auth/signIn");
     } else {
       alert("Please fill in all fields!");
     }
@@ -191,7 +192,7 @@ export default function RegisterPage() {
         {/* Already have an account */}
         <div className="text-start text-custom-white mt-5 text-sm sm:text-base">
           Already Register?
-          <Link href="/api/auth/signIn">
+          <Link href="/auth/signIn">
             <span className="ml-1 cursor-pointer underline">Login here</span>
           </Link>
         </div>
