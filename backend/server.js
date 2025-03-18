@@ -9,6 +9,7 @@ dotenv.config();
 
 const supabase = require("./src/config/db");
 const userRoutes = require('./src/routes/userRoutes')
+const blogRoutes = require('./src/routes/blogRoute');
 
 // Initialize Express app
 const app = express();
@@ -25,20 +26,7 @@ app.get("/", (req, res) => {
 });
 app.use('/api/users', userRoutes);
 
-
-// Sample API query
-async function getBlogs() {
-  try {
-    let { data: users, error } = await supabase
-    .from('users')
-    .select('*')
-    return users
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-getBlogs().then((blogs) => {console.log(blogs)})
+app.use('/api/blogs', blogRoutes)
 
 // Start the server
 app.listen(PORT, () => {
