@@ -9,19 +9,9 @@ import flower_click from "@public/images/navbar/flower_click.svg";
 import bee from "@public/images/navbar/bee.svg";
 import bee_click from "@public/images/navbar/bee_click.svg";
 import { useRouter } from "next/navigation";
+import { Icon, Position } from "../../interface";
 
 // Define types for the icon and position data
-interface Icon {
-  src: string;
-  src_click: string;
-  alt: string;
-  path: string;
-}
-
-interface Position {
-  left: number;
-  top: number;
-}
 
 export default function GlobalNavbar() {
   const router = useRouter();

@@ -14,7 +14,7 @@ export default function SignInPage() {
   const [password, setPassword] = useState("");
   const [passOpen, setPassOpen] = useState(false);
 
-  const onSubmit = async () => {
+  const onSubmit = () => {
     // if (name && password) {
     //   const result = await signIn("credentials", {
     //     name: name,

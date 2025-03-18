@@ -7,7 +7,8 @@ const cors = require("cors");
 dotenv.config();
 
 const supabase = require("./src/config/db");
-const userRoutes = require('./src/routes/userRoutes')
+const userRoutes = require('./src/routes/userRoutes');
+const tarotRoutes = require('./src/routes/tarotRoutes');
 
 // Initialize Express app
 const app = express();
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 });
 app.use('/api/users', userRoutes);
 
+app.use('/tarot', tarotRoutes);
 // Sample API query
 
 
