@@ -31,20 +31,17 @@ export default function GlobalNavbar() {
     setActiveIcon(index);
     router.push(path);
   };
+
   const [showClickedIcon, setShowClickedIcon] = useState<boolean>(true); // Control visibility of clicked icon
   const navRef = useRef<HTMLDivElement | null>(null); // Ref for the navigation container
   const indicatorRef = useRef<HTMLDivElement | null>(null); // Ref for the indicator
-  const [positions, setPositions] = useState<Position>(() => {
+  const [positions, setPositions] = useState<Position[]>(() => {
     if (typeof window !== "undefined") {
       const storedPositions = localStorage.getItem("positions");
       return storedPositions ? JSON.parse(storedPositions) : { left: 0, top: 0 };
     }
     return { left: 0, top: 0 };
   });
-
-  useEffect(() => {
-    localStorage.setItem("positions", JSON.stringify(positions));
-  }, [positions]);
   // const [onPage, setOnPage] = useState<string>(
   //   typeof window !== "undefined" ? localStorage.getItem("") || "" : ""
   // );
