@@ -2,7 +2,7 @@ import { Blog } from "../../interface";
 import User from "@public/images/User.svg";
 import Image from "next/image";
 import { Tag } from "../../interface";
-import CommunityTag from "./community_tag";
+import { CommunityTag } from "./community_tag";
 import Example from "@public/images/tarot/ace-of-cups.png";
 import heart from "@public/images/Heart.svg";
 import comment from "@public/images/Comment.svg";
@@ -17,7 +17,11 @@ export default function CommunityBlog({ blog }: { blog: Blog }) {
         </div>
         <div className="flex gap-2">
           {blog.tags.map((tag, idx) => (
-            <CommunityTag tag={tag} key={idx} />
+            <CommunityTag
+              tag={{ name: tag.name, color: tag.color }}
+              variant="on_post"
+              onClick={() => console.log("Button clicked!")}
+            />
           ))}
         </div>
       </div>

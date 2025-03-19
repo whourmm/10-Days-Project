@@ -4,38 +4,27 @@ import { useState } from "react";
 
 import CommunityBlog from "@/components/community_blog";
 import CommunitySearchBar from "@/components/community_search_bar";
-import CommunityTag from "@/components/community_tag";
-import { Tag, Blog } from "../../../../interface";
+import { CommunityTag, ClickableTag } from "@/components/community_tag";
+import { Tag, Blog, tags } from "../../../../interface";
 
 export default function page() {
-  const [chosenTags, setChosenTag] = useState<string>("");
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  const handleTagSelection = (tag: Tag, isSelected: boolean) => {
+    if (isSelected) {
+      // Add the tag to selected tags
+      setSelectedTags((prev) => [...prev, tag]);
 
-  const tags: Tag[] = [
-    {
-      name: "ความรัก",
-      color: "pink",
-    },
-    {
-      name: "การงาน",
-      color: "purple",
-    },
-    {
-      name: "โชคลาภ",
-      color: "orange",
-    },
-    {
-      name: "สุขภาพ",
-      color: "green",
-    },
-    {
-      name: "การเงิน",
-      color: "yellow",
-    },
-    {
-      name: "อื่นๆ",
-      color: "blue",
-    },
-  ];
+      // Apply any filters or effects based on this tag
+      // applyTagFilter(tag);
+    } else {
+      // Remove the tag from selected tags
+      setSelectedTags((prev) => prev.filter((t) => t.name !== tag.name));
+
+      // Remove any filters or effects based on this tag
+      // removeTagFilter(tag);
+    }
+  };
+
   const blog: Blog = {
     title: "Title",
     author: "Author",
@@ -63,7 +52,11 @@ export default function page() {
         <div className="w-full overflow-x-auto scrollbar-hide flex flex-row gap-2 py-2w-full overflow-x-auto hide-scrollbar flex flex-row gap-2 py-2">
           <div className="flex flex-row gap-2 min-w-max">
             {tags.map((tag, idx) => (
-              <CommunityTag key={idx} tag={tag} />
+              <ClickableTag
+                key={tag.name}
+                tag={tag}
+                onSelect={(tag, isSelected) => handleTagSelection(tag, isSelected)}
+              />
             ))}
           </div>
         </div>
