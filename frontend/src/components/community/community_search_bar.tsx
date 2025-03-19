@@ -20,7 +20,7 @@ export default function CommunitySearchBar({ onSearch }: CommunitySearchBarProps
   };
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full flex">
       <input
         type="text"
         required
@@ -31,7 +31,7 @@ export default function CommunitySearchBar({ onSearch }: CommunitySearchBarProps
         onChange={handleInputChange}
         className={`bg-white border-[2px] rounded-full w-full pr-4 pl-12 py-1 sm:py-3 text-gray-700 text-tag $`}
       />
-      <div className="absolute left-4 top-8 transform -translate-y-1/2 cursor-pointer">
+      <div className="absolute left-4 top-5 transform -translate-y-1/2 cursor-pointer">
         <Image src={search} alt="Search icon" width={20} height={20} />
       </div>
     </div>

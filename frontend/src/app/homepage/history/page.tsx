@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Blog } from "../../../../interface";
 
-import HistoryProfile from "@/components/้history/history_profile";
+import HistoryProfile from "@/components/history/history_profile";
 import CommunityBlog from "@/components/community/community_blog";
 
 const blogs: Blog[] = [
@@ -67,16 +67,7 @@ export default function page() {
 
   return (
     <div className="w-full text-5xl text-white flex items-center justify-center flex-col">
-      <div className="mt-6 flex w-full justify-end ">
-        <button
-          className={`bg-white text-tag font-bold shadow-lg px-6 py-5 sm:py-3 text-black rounded-full transition-colors ${
-            !isEdited ? "" : ""
-          }`}
-          onClick={() => setIsEdited(!isEdited)}
-        >
-          Edit
-        </button>
-      </div>
+      <div className="mt-6 flex w-full justify-end "></div>
       <HistoryProfile />
 
       <div className="flex flex-col gap-5 mt-5 mb-20 ">
