@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import { Athiti } from "@next/font/google";
+import { Athiti, Fredericka_the_Great } from "next/font/google";
+import GlobalNavbarDesktop from "@/components/navbar/global_nav_bar_desktop";
 import "./globals.css";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+// import { authOptions } from "./api/auth/[...nextauth]/route";
 import NextAuthProvider from "./providers/NextAuthProvider";
 
 const athiti = Athiti({
   subsets: ["thai", "latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
+});
+
+const frederickaTheGreat = Fredericka_the_Great({
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -20,12 +26,17 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const nextAuthSession = await getServerSession(authOptions);
+  // const nextAuthSession = await getServerSession(authOptions);
   return (
     <html lang="th">
-      <NextAuthProvider session={nextAuthSession}>
-        <body className={` bg-main-background ${athiti.className}`}>{children}</body>
-      </NextAuthProvider>
+      {/* <NextAuthProvider session={nextAuthSession}> */}
+      <body className={` bg-main-background`}>
+        <div className="flex-1 mx-auto w-full">
+          <GlobalNavbarDesktop />
+          {children}
+        </div>
+      </body>
+      {/* </NextAuthProvider> */}
     </html>
   );
 }

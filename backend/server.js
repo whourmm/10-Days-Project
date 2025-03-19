@@ -7,13 +7,13 @@ const cors = require("cors");
 dotenv.config();
 
 const supabase = require("./src/config/db");
-
-// Import routes
-const blogs = require("./src/routes/blogs");
+const userRoutes = require('./src/routes/userRoutes');
+const tarotRoutes = require('./src/routes/tarotRoutes');
+const blogRoutes = require("./src/routes/blogs");
 
 // Initialize Express app
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json()); // Parse JSON requests
@@ -23,8 +23,13 @@ app.use(cors()); // Enable CORS
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
+app.use('/api/users', userRoutes);
 
-app.use("/api/blogs", blogs);
+app.use('/tarot', tarotRoutes);
+// Sample API query
+
+
+app.use("/api/blogs", blogRoutes);
 
 // Start the server
 app.listen(PORT, () => {
