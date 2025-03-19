@@ -8,6 +8,9 @@ dotenv.config();
 
 const supabase = require("./src/config/db");
 
+// Import routes
+const blogs = require("./src/routes/blogs");
+
 // Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,19 +24,7 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-// Sample API query
-async function getBlogs() {
-  try {
-    let { data: users, error } = await supabase
-    .from('users')
-    .select('*')
-    return users
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-getBlogs().then((blogs) => {console.log(blogs)})
+app.use("/api/blogs", blogs);
 
 // Start the server
 app.listen(PORT, () => {
