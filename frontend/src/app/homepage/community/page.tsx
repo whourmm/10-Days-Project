@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
 import CommunityBlog from "@/components/community/community_blog";
 import CommunitySearchBar from "@/components/community/community_search_bar";
 import { CommunityTag, ClickableTag } from "@/components/community/community_tag";
 import { Tag, Blog, tags } from "../../../../interface";
+import create_post from "@public/images/CreatePost.svg";
+import Image from "next/image";
 
 export default function page() {
+  const router = useRouter();
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showOthers, setShowOthers] = useState<boolean>(false);
@@ -127,10 +130,21 @@ export default function page() {
   // Create an "Others" tag
   const othersTag: Tag = { name: "อื่นๆ", color: "blue" };
 
+  // Handle create post button click
+  const handleCreatePostClick = () => {
+    router.push("/homepage/community/create");
+  };
+
   return (
     <div className="w-full sm:mt-20">
-      <div className="w-full  text-5xl text-white flex flex-col items-center justify-center">
-        <CommunitySearchBar onSearch={handleSearchChange} />
+      <div className="w-full text-5xl text-white flex flex-col items-center justify-center">
+        <div className="w-full flex items-center justify-center gap-2 h-full mb-2">
+          <CommunitySearchBar onSearch={handleSearchChange} />
+          <div className="cursor-pointer" onClick={handleCreatePostClick}>
+            <Image src={create_post} alt="Create Post" />
+          </div>
+        </div>
+
         <div className="w-full overflow-x-auto flex flex-row gap-2 py-2 [scrollbar-width:none] [-ms-overflow-style:none]">
           <style jsx>{`
             div::-webkit-scrollbar {
