@@ -42,6 +42,17 @@ const config: Config = {
         'logo': "url('/images/Logo.svg')",
         'icon-background' : "url('url('/images/navbar/circle_bee.svg')')",
       },
+      backgroundSize: {
+        'full': 'cover',
+        'auto': 'auto',
+        'custom-size': '200% 100%',
+        // Add more custom sizes if needed
+      },
+      backgroundPosition: {
+        'bottom-4': 'center bottom 1rem',
+        'top-center': 'center top',
+        // Add more custom positions if needed
+      },
       fontSize: {
         'xxs': '0.65rem', // Extra small font size
         'xxl': '1.75rem',

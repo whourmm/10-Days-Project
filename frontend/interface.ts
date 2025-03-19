@@ -54,10 +54,6 @@ export const tags: Tag[] = [
     name: "การเงิน",
     color: "yellow",
   },
-  {
-    name: "อื่นๆ",
-    color: "blue",
-  },
 ];
 
 export interface TagProps {
@@ -77,13 +73,13 @@ export type COLOR  = 'pink' | 'green' | 'blue' | 'yellow' | 'purple' | 'red' | '
 
 
 export interface Blog {
-    title : string,
-    author : string,
-    likes : number,
-    comments_count : number,
-    tags: Tag[],
-    created_at : string,
-    updated_at : string,
-    content: string,
+  title : string,
+  author : string,
+  likes : number,
+  comments_count : number,
+  tags: string[],
+  created_at : string,
+  updated_at : string,
+  content: string,
 
 }
