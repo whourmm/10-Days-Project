@@ -30,7 +30,7 @@ async function getRandomCard(userId) {
     const cardNames = Object.keys(tarotCards);  // Get all card names (keys of the tarotCards object)
     const randomIndex = getRandomIndex(cardNames.length);  // Use the utility to get a random index
     const randomCardName = cardNames[randomIndex];  // Get the card name at that index
-    const cardDescription = tarotCards[randomCardName];  // Get the card description from tarotCards
+    const cardDescription = tarotCards[randomCardName].prediction;  // Get the card description from tarotCards
 
     // Insert the new card transaction into the tarot_transactions table
     const { data, insertError } = await supabase
