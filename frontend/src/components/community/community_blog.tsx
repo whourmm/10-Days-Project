@@ -1,7 +1,7 @@
-import { Blog, COLOR } from "../../interface";
+import { Blog, COLOR } from "../../../interface";
 import User from "@public/images/User.svg";
 import Image from "next/image";
-import { Tag, tags } from "../../interface";
+import { Tag, tags } from "../../../interface";
 import { CommunityTag } from "./community_tag";
 import Example from "@public/images/tarot/ace-of-cups.png";
 import heart from "@public/images/Heart.svg";

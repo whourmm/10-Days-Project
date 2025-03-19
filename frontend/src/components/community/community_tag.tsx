@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tag, TagProps, TagVariant } from "../../interface";
+import { Tag, TagProps, TagVariant } from "../../../interface";
 
 // Define button variants
 

@@ -55,7 +55,7 @@ const config: Config = {
       },
       fontSize: {
         'xxs': '0.65rem', // Extra small font size
-        'xxl': '1.75rem',
+        'xxl': '2.00rem',
         'md' : '1.40rem',
         'tag' : '1.2rem',
         'header' : '2.5rem',

@@ -22,13 +22,13 @@ export default function Layout({
         <div className="fixed inset-0 cosmic-latte opacity-30 -z-10"></div>
 
         {/* Content container */}
-        <div className="relative z-0">{children}</div>
+        <div className="relative z-0 p-5">{children}</div>
 
         {/* Navigation bar fixed at bottom */}
         <div className="bottom-0 z-50 fixed w-full sm:hidden">
           <GlobalNavBar />
         </div>
-        <div className="bottom-0 z-50 fixed w-full hidden sm:block">
+        <div className="bottom-0 z-50 fixed w-full hidden sm:block \">
           <GlobalNavbarDesktop />
         </div>
       </body>

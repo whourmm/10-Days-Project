@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-import CommunityBlog from "@/components/community_blog";
-import CommunitySearchBar from "@/components/community_search_bar";
-import { CommunityTag, ClickableTag } from "@/components/community_tag";
+import CommunityBlog from "@/components/community/community_blog";
+import CommunitySearchBar from "@/components/community/community_search_bar";
+import { CommunityTag, ClickableTag } from "@/components/community/community_tag";
 import { Tag, Blog, tags } from "../../../../interface";
 
 export default function page() {
@@ -15,8 +15,9 @@ export default function page() {
   // Sample blogs data for demonstration
   const blogs: Blog[] = [
     {
+      id: "0",
       title: "Title 1",
-      author: "Author 1",
+      author: "BeeLucky",
       likes: 100,
       comments_count: 12305,
       tags: ["ความรัก", "การเงิน"],
@@ -26,6 +27,7 @@ export default function page() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
     {
+      id: "1",
       title: "Title 2",
       author: "Author 2",
       likes: 50,
@@ -37,6 +39,7 @@ export default function page() {
         "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     },
     {
+      id: "3",
       title: "Title 3",
       author: "Author 3",
       likes: 75,
@@ -48,8 +51,9 @@ export default function page() {
         "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     },
     {
+      id: "4",
       title: "Other Blog",
-      author: "Author 4",
+      author: "BeeLucky",
       likes: 30,
       comments_count: 420,
       tags: ["ท่องเที่ยว"], // This tag is not in the predefined list
@@ -61,16 +65,6 @@ export default function page() {
 
   // Get all predefined tag names
   const predefinedTagNames = tags.map((tag) => tag.name);
-
-  // Function to map tag names to tag objects with colors
-  // const mapTagsWithColors = (tagNames: string[]): Tag[] => {
-  //   return tagNames.map((tagName) => {
-  //     // Find matching tag from the tags array
-  //     const matchedTag = tags.find((t) => t.name === tagName);
-  //     // Return the matched tag or create a default one if not found
-  //     return matchedTag || { name: tagName, color: "gray" };
-  //   });
-  // };
 
   // Function to check if a blog has any tags not in the predefined list
   const hasOtherTags = (blog: Blog): boolean => {
@@ -135,7 +129,7 @@ export default function page() {
 
   return (
     <div className="w-full sm:mt-20">
-      <div className="w-full p-5 text-5xl text-white flex flex-col items-center justify-center">
+      <div className="w-full  text-5xl text-white flex flex-col items-center justify-center">
         <CommunitySearchBar onSearch={handleSearchChange} />
         <div className="w-full overflow-x-auto flex flex-row gap-2 py-2 [scrollbar-width:none] [-ms-overflow-style:none]">
           <style jsx>{`
