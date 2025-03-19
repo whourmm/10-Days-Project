@@ -7,6 +7,9 @@ async function getBlogs(req, res) {
     let { data: blogs, error } = await supabase
     .from('blogs')
     .select('*')
+
+    if (error) throw error;
+
     res.json(blogs)
   } catch (error) {
     res.status(500).json({error: "Internal server error"})
@@ -21,6 +24,9 @@ async function getBlog(req, res) {
     .from('blogs')
     .select('*')
     .eq('id', req.params.id)
+
+    if (error) throw error;
+
     res.json(blog)
   } catch (error) {
     res.status(500).json({error: "Internal server error"})
@@ -32,7 +38,7 @@ async function getBlog(req, res) {
 async function createBlog(req, res) {
   try {
     const { title, content, tags, image } = req.body;
-
+    
     // Validate fields
     if (!title || !content || !tags || tags.length === 0 || tags.length > 3) {
       return res.status(400).json({ error: "Please provide all required fields and ensure tags are between 1-3." });
