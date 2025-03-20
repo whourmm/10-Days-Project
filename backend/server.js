@@ -9,6 +9,7 @@ dotenv.config();
 const supabase = require("./src/config/db");
 const userRoutes = require('./src/routes/userRoutes');
 const tarotRoutes = require('./src/routes/tarotRoutes');
+const blogRoutes = require("./src/routes/blogRoutes");
 
 // Initialize Express app
 const app = express();
@@ -28,6 +29,7 @@ app.use('/tarot', tarotRoutes);
 // Sample API query
 
 
+app.use("/api/blogs", blogRoutes);
 
 // Start the server
 app.listen(PORT, () => {
