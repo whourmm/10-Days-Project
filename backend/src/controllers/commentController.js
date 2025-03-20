@@ -18,6 +18,12 @@ const createComment = async (req, res) => {
             return res.status(401).json({ error: "Unauthorized: Invalid token" });
         }
 
+        let { data: userData, error: userError } = await supabase
+            .from("users")
+            .select("username")
+            .eq("id", user.id)
+            .single();
+
         const { data: comment, error, status } = await supabase
             .from('comment')
             .insert([
@@ -25,7 +31,7 @@ const createComment = async (req, res) => {
                     content: content,
                     blog_id: blog_id, 
                     user_id: user.id,
-                    author: user.username,
+                    author: userData.username,
                 }
             ])
             .select()
