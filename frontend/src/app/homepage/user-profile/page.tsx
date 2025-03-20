@@ -8,7 +8,7 @@ import CommunityBlog from "@/components/community/community_blog";
 
 const blogs: Blog[] = [
   {
-    id: "0",
+    id: 0,
     title: "Title 1",
     author: "BeeLucky",
     likes: 100,
@@ -16,11 +16,12 @@ const blogs: Blog[] = [
     tags: ["ความรัก", "การเงิน"],
     created_at: "2021-12-22",
     updated_at: "2025-11-20",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    content: "",
+    image_url: "",
+    user_id: "1",
   },
   {
-    id: "1",
+    id: 1,
     title: "Title 2",
     author: "Author 2",
     likes: 50,
@@ -30,9 +31,11 @@ const blogs: Blog[] = [
     updated_at: "2025-10-10",
     content:
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    image_url: "",
+    user_id: "1",
   },
   {
-    id: "3",
+    id: 3,
     title: "Title 3",
     author: "Author 3",
     likes: 75,
@@ -42,9 +45,11 @@ const blogs: Blog[] = [
     updated_at: "2025-09-25",
     content:
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    image_url: "",
+    user_id: "1",
   },
   {
-    id: "4",
+    id: 4,
     title: "Other Blog",
     author: "BeeLucky",
     likes: 30,
@@ -53,6 +58,8 @@ const blogs: Blog[] = [
     created_at: "2022-03-10",
     updated_at: "2025-08-15",
     content: "This blog has tags that aren't in the predefined tag list.",
+    image_url: "",
+    user_id: "1",
   },
 ];
 

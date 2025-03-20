@@ -23,7 +23,7 @@ export default function Page() {
         // After fade completes completely (full opacity), navigate to result page
         setTimeout(() => {
           if (router) {
-            router.push(`/homepage/daily-tarot/result-page/${rid}`);
+            router.push(`/homepage/daily-tarot/result-page`);
           }
         }, 1000); // 1 second - exactly matches the transition duration
       }, 2000); // 2 seconds for spin animation

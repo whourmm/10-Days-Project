@@ -23,7 +23,7 @@ export default function Layout({
     <html lang="th">
       <body className={`${athiti.className} relative min-h-screen `}>
         {/* Base background layer */}
-        <div className="bg-cover sm:bg-auto bg-main-background bg-center opacity-50 -z-20 fixed inset-0"></div>
+        <div className="sm:bg-auto bg-desktop-background bg-center opacity-50 -z-20 fixed inset-0 "></div>
 
         {/* Secondary lighter overlay layer */}
         <div className="fixed inset-0 cosmic-latte opacity-30 -z-10"></div>
