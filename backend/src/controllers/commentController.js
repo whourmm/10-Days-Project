@@ -24,7 +24,8 @@ const createComment = async (req, res) => {
                 { 
                     content: content,
                     blog_id: blog_id, 
-                    user_id: user.id
+                    user_id: user.id,
+                    author: user.username,
                 }
             ])
             .select()
