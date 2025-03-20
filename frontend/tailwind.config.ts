@@ -72,6 +72,18 @@ const config: Config = {
         'loose': '1.75',
         'extra-loose': '2',
       },
+      animation: {
+        'spin-y-3': 'spin-y-3 2s ease-in-out forwards',
+      },
+      keyframes: {
+        'spin-y-3': {
+          '0%': { transform: 'rotateY(0deg)' },
+          '100%': { transform: 'rotateY(1080deg)' },
+        },
+      },
+      transitionDuration: {
+        '2000': '2000ms',
+      },
     },
   },
   plugins: [],
