@@ -44,24 +44,37 @@ async function createBlog(req, res) {
       return res.status(400).json({ error: "Please provide all required fields and ensure tags are between 1-3." });
     }
 
-    // Get user session
-    const { data: { user }, error: authError } = await supabase.auth.getUser(req.headers.authorization);
-    if (authError || !user) {
-      return res.status(401).json({ error: "Unauthorized" });
+    const token = req.headers.authorization?.split(" ")[1]; 
+    if (!token) {
+      return res.status(401).json({ error: "Unauthorized: No token provided" });
     }
+
+    //console.log("Extracted Token:", token); // Debugging log
+
+    // Validate session with Supabase
+    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+    if (authError || !user) {
+      return res.status(401).json({ error: "Unauthorized: Invalid token" });
+    }
+
+    //console.log("User ID:", user.id); // Debugging log
 
     // Fetch user details
     let { data: userData, error: userError } = await supabase
       .from("users")
-      .select("name")
+      .select("username")
       .eq("id", user.id)
       .single();
+
+    console.log("User Error:", userError); // Debugging log
+    console.log("User Data:", userData); // Debugging log
+
     if (userError || !userData) {
       return res.status(404).json({ error: "User not found" });
     }
 
     let imageUrl = null;
-    if (image) {
+    if (image && image.includes(",")) {
       // Convert base64 to buffer (if image is sent as base64)
       const buffer = Buffer.from(image.split(",")[1], "base64");
 
@@ -79,7 +92,17 @@ async function createBlog(req, res) {
       }
 
       // Get public URL of uploaded image
-      imageUrl = supabase.storage.from("blog-images").getPublicUrl(filePath).data.publicUrl;
+      // imageUrl = supabase.storage.from("blog-images").getPublicUrl(filePath).data.publicUrl;
+
+      const { image_data, storage_error } = supabase.storage.from("blog-images").getPublicUrl(filePath);
+
+      if (storage_error) {
+        console.storage_error('Error getting public URL:', storage_error.message);
+      } else {
+        imageUrl = image_data.publicUrl;
+        console.log('Public URL:', imageUrl);
+      }
+
     }
 
     // Insert blog with image URL
@@ -90,9 +113,9 @@ async function createBlog(req, res) {
           title,
           content,
           user_id: user.id,
-          author: userData.name,
+          author: userData.username,
           tags,
-          image: imageUrl, // Store public image URL
+          image_url: imageUrl, // Store public image URL
         }
       ])
       .select();
