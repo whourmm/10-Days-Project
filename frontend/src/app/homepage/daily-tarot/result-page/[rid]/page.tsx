@@ -4,10 +4,17 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import GlobalNavbar from "@/components/navbar/global_nav_bar";
 import test_card from "@public/images/tarot/ace-of-cups.png";
+import { useRouter } from "next/router";
 
 export default function page({ params }: { params: { rid: string } }) {
   const [opacity, setOpacity] = useState(0);
   const [translateY, setTranslateY] = useState("100px"); // Start below viewport
+  const router = useRouter();
+  const rid = params.rid;
+
+  const onHistoryClick = () => {
+    router.push(`/homepage/daily-tarot/history/${rid}`);
+  };
 
   useEffect(() => {
     // Fade in animation when component mounts
@@ -81,7 +88,7 @@ export default function page({ params }: { params: { rid: string } }) {
           {/* Bottom Navigation */}
           <div className="w-full flex justify-center items-center ">
             <button
-              // onClick={onHistoryClick}
+              onClick={onHistoryClick}
               className="flex items-center px-4 py-2 text-black hover:text-yellow-400 transition-colors border-[1px] border-black rounded-xl "
             >
               <span className="text-sm">Go To History Page</span>
