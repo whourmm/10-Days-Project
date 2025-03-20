@@ -40,7 +40,7 @@ async function createBlog(req, res) {
     const { title, content, tags, image } = req.body;
     
     // Validate fields
-    if (!title || !content || !tags || tags.length === 0 || tags.length > 3) {
+    if (!title || !tags || tags.length === 0 || tags.length > 3) {
       return res.status(400).json({ error: "Please provide all required fields and ensure tags are between 1-3." });
     }
 
@@ -94,13 +94,15 @@ async function createBlog(req, res) {
       // Get public URL of uploaded image
       // imageUrl = supabase.storage.from("blog-images").getPublicUrl(filePath).data.publicUrl;
 
-      const { image_data, storage_error } = supabase.storage.from("blog-images").getPublicUrl(filePath);
-
-      if (storage_error) {
-        console.storage_error('Error getting public URL:', storage_error.message);
-      } else {
-        imageUrl = image_data.publicUrl;
-        console.log('Public URL:', imageUrl);
+      if(uploadData) {
+        const { data: url_data, error: url_error } = supabase.storage.from("blog-images").getPublicUrl(uploadData.path);
+        
+        if (url_error) {
+          console.storage_error('Error getting public URL:', url_error.message);
+        } else {
+          imageUrl = url_data.publicUrl;
+          //console.log('Public URL:', imageUrl);
+        }
       }
 
     }
