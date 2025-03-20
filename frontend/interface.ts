@@ -73,7 +73,7 @@ export type COLOR  = 'pink' | 'green' | 'blue' | 'yellow' | 'purple' | 'red' | '
 
 
 export interface Blog {
-  id :string,
+  id :number,
   user_id : string
   title : string,
   author : string,

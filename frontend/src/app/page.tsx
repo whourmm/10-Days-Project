@@ -9,15 +9,10 @@ export default function Home() {
     router.push("/register");
   };
   return (
-    <div className="flex flex-row h-[100vh]">
+    <div className="flex flex-row h-[100vh] px-5">
       <div className="flex flex-col justify-around items-start gap-5 my-10 w-full max-w-screen-md mx-auto">
         <div className="">
-          <Image
-            src={logo}
-            alt="Logo"
-            className="saturate-500 w-[17vh] sm:w-56 md:w-64"
-            priority
-          />
+          <Image src={logo} alt="Logo" className="saturate-500 w-[17vh] sm:w-56 md:w-64" priority />
           <section className="drop-shadow-md font-semibold text-header text-white leading-extra-tight">
             Welcome to BeeLuck
           </section>
