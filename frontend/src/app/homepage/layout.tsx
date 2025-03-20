@@ -16,7 +16,7 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-  const hideNavbarPaths = ["/homepage/community/create", "/auth/signin", "/auth/register"];
+  const hideNavbarPaths = ["/homepage/community/create", "/homepage/daily-tarot", "/auth/register"];
 
   const showNavbar = !hideNavbarPaths.some((path) => pathname.startsWith(path));
   return (
