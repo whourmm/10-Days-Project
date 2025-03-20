@@ -1,5 +1,5 @@
 //10-Days-Project\backend\src\controllers\tarotController.js
-const { tarotCards } = require('../models/tarotModel'); // Import the model with declared attributes
+const tarotModel = require('../models/tarotModel'); // Import the model with declared attributes
 const supabase = require('../config/db');  // Import Supabase client
 const { getRandomIndex } = require('../utils/randomUtil');  // Import random index utility
 
@@ -49,12 +49,13 @@ async function getRandomCard(req, res) {
       // User has already received a card today
       return res.status(403).json({ error: "You have already received your tarot card for today." });
     }
+    //console.log("tarot Model:",  tarotModel);  // Debugging log
 
     // Generate a random tarot card from the tarotCards object
-    const cardNames = Object.keys(tarotCards); // Get all card names (keys of the tarotCards object)
+    const cardNames = Object.keys(tarotModel); // Get all card names (keys of the tarotCards object)
     const randomIndex = getRandomIndex(cardNames.length);  // Use the utility to get a random index
     const randomCardName = cardNames[randomIndex];  // Get the card name at that index
-    const cardDescription = tarotCards[randomCardName]; // Get the card description from tarotCards
+    const cardDescription = tarotModel[randomCardName].prediction;; // Get the card description from tarotCards
 
     // Insert the new card transaction into the tarot_transactions table
     const { data, insertError } = await supabase

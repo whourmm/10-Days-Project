@@ -16,12 +16,12 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-  const hideNavbarPaths = ["/homepage/community/create", "/auth/signin", "/auth/register"];
+  const hideNavbarPaths = ["/homepage/community/create", "/homepage/daily-tarot", "/auth/register"];
 
   const showNavbar = !hideNavbarPaths.some((path) => pathname.startsWith(path));
   return (
     <html lang="th">
-      <body className={`${athiti.className} relative min-h-screen`}>
+      <body className={`${athiti.className} relative min-h-screen `}>
         {/* Base background layer */}
         <div className="bg-cover sm:bg-auto bg-main-background bg-center opacity-50 -z-20 fixed inset-0"></div>
 
@@ -33,7 +33,7 @@ export default function Layout({
 
         {/* Navigation bar fixed at bottom */}
         <div className="bottom-0 z-50 fixed w-full sm:hidden">{showNavbar && <GlobalNavBar />}</div>
-        <div className="bottom-0 z-50 fixed w-full hidden sm:block">
+        <div className="bottom-0 z-50 fixed w-full hidden sm:block ">
           <GlobalNavbarDesktop />
         </div>
       </body>

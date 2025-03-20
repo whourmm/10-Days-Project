@@ -114,20 +114,26 @@ export default function CommunityBlog({ blog }: { blog: Blog }) {
           ))}
         </div>
       </div>
-      <div className="my-5 h-[30vh] bg-gray-100 "></div>
-      <div className="text-sm">{blog.content}</div>
-      <div className="mt-3 flex justify-between text-sm">
-        <div className="flex gap-2 items-center text-vidva ">
+
+      {blog.image_url ? (
+        <div className="my-5 h-[30vh] ">
+          <img src={blog.image_url} alt="" className="object-cover" />{" "}
+        </div>
+      ) : null}
+
+      <div className="text-sm mt-5">{blog.content}</div>
+      <div className="mt-3 flex justify-end text-sm">
+        {/* <div className="flex gap-2 items-center text-vidva ">
           <Image src={heart} alt="heart" />
           <div className="">{blog.likes}</div>
           <div className="">Likes</div>
-        </div>
+        </div> */}
         <div
           className="flex gap-2 items-center text-raw-umber cursor-pointer"
           onClick={handleCommentClick}
         >
           <Image src={comment} alt="comment" />
-          <div className="">{blog.comments_count}</div>
+          {/* <div className="">{blog.comments_count}</div> */}
           <div className="">Comments</div>
         </div>
       </div>

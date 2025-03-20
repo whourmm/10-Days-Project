@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import CommunityBlog from "@/components/community/community_blog";
 import CommunitySearchBar from "@/components/community/community_search_bar";
@@ -8,63 +8,82 @@ import { CommunityTag, ClickableTag } from "@/components/community/community_tag
 import { Tag, Blog, tags } from "../../../../interface";
 import create_post from "@public/images/CreatePost.svg";
 import Image from "next/image";
+import getBlogs from "@/libs/getBlogs";
 
 export default function page() {
   const router = useRouter();
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showOthers, setShowOthers] = useState<boolean>(false);
+  const [blogs, setBlogs] = useState<Blog[]>();
 
   // Sample blogs data for demonstration
-  const blogs: Blog[] = [
-    {
-      id: "0",
-      title: "Title 1",
-      author: "BeeLucky",
-      likes: 100,
-      comments_count: 12305,
-      tags: ["ความรัก", "การเงิน"],
-      created_at: "2021-12-22",
-      updated_at: "2025-11-20",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      id: "1",
-      title: "Title 2",
-      author: "Author 2",
-      likes: 50,
-      comments_count: 1205,
-      tags: ["การเงิน", "สุขภาพ"],
-      created_at: "2022-01-15",
-      updated_at: "2025-10-10",
-      content:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    },
-    {
-      id: "3",
-      title: "Title 3",
-      author: "Author 3",
-      likes: 75,
-      comments_count: 8050,
-      tags: ["สุขภาพ", "อาหาร"],
-      created_at: "2022-02-05",
-      updated_at: "2025-09-25",
-      content:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    },
-    {
-      id: "4",
-      title: "Other Blog",
-      author: "BeeLucky",
-      likes: 30,
-      comments_count: 420,
-      tags: ["ท่องเที่ยว"], // This tag is not in the predefined list
-      created_at: "2022-03-10",
-      updated_at: "2025-08-15",
-      content: "This blog has tags that aren't in the predefined tag list.",
-    },
-  ];
+  // const blogs: Blog[] = [
+  //   {
+  //     id: "0",
+  //     title: "Title 1",
+  //     author: "BeeLucky",
+  //     likes: 100,
+  //     comments_count: 12305,
+  //     tags: ["ความรัก", "การเงิน"],
+  //     created_at: "2021-12-22",
+  //     updated_at: "2025-11-20",
+  //     content:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  //   },
+  //   {
+  //     id: "1",
+  //     title: "Title 2",
+  //     author: "Author 2",
+  //     likes: 50,
+  //     comments_count: 1205,
+  //     tags: ["การเงิน", "สุขภาพ"],
+  //     created_at: "2022-01-15",
+  //     updated_at: "2025-10-10",
+  //     content:
+  //       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  //   },
+  //   {
+  //     id: "3",
+  //     title: "Title 3",
+  //     author: "Author 3",
+  //     likes: 75,
+  //     comments_count: 8050,
+  //     tags: ["สุขภาพ", "อาหาร"],
+  //     created_at: "2022-02-05",
+  //     updated_at: "2025-09-25",
+  //     content:
+  //       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  //   },
+  //   {
+  //     id: "4",
+  //     title: "Other Blog",
+  //     author: "BeeLucky",
+  //     likes: 30,
+  //     comments_count: 420,
+  //     tags: ["ท่องเที่ยว"], // This tag is not in the predefined list
+  //     created_at: "2022-03-10",
+  //     updated_at: "2025-08-15",
+  //     content: "This blog has tags that aren't in the predefined tag list.",
+  //   },
+  // ];
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const blogs = await getBlogs();
+        console.log(blogs);
+        setBlogs(blogs);
+        // Remove the alert as it's not needed and disruptive to UX
+      } catch (error) {
+        console.error("Error getting blogs", error);
+        // Consider using a toast notification instead of an alert
+        // or setting an error state to display in the UI
+      }
+    };
+
+    fetchBlogs();
+  }, []); // Empty dependency array so it only runs once on component mount
 
   // Get all predefined tag names
   const predefinedTagNames = tags.map((tag) => tag.name);
@@ -120,6 +139,7 @@ export default function page() {
   };
 
   // Get filtered blogs
+  if (!blogs) return null;
   const filteredBlogs = filterBlogs(blogs);
 
   // Handle search input change
@@ -134,6 +154,8 @@ export default function page() {
   const handleCreatePostClick = () => {
     router.push("/homepage/community/create");
   };
+
+  if (!blogs) return null;
 
   return (
     <div className="w-full sm:mt-20">
