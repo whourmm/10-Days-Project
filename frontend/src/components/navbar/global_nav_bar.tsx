@@ -9,27 +9,42 @@ import flower_click from "@public/images/navbar/flower_click.svg";
 import bee from "@public/images/navbar/bee.svg";
 import bee_click from "@public/images/navbar/bee_click.svg";
 import { useRouter } from "next/navigation";
+import { Icon, Position } from "../../../interface";
 
 // Define types for the icon and position data
-interface Icon {
-  src: string;
-  src_click: string;
-  alt: string;
-  path: string;
-}
-
-interface Position {
-  left: number;
-  top: number;
-}
 
 export default function GlobalNavbar() {
   const router = useRouter();
-  const [activeIcon, setActiveIcon] = useState<number>(0); // Active icon index
+  const [activeIcon, setActiveIcon] = useState<number>(() => {
+    if (typeof window !== "undefined") {
+      const storedIcon = localStorage.getItem("activeIcon");
+      return storedIcon ? parseInt(storedIcon, 10) : 0;
+    }
+    return 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("activeIcon", activeIcon.toString());
+  }, [activeIcon]);
+
+  const handleClick = (index: number, path: string) => {
+    setActiveIcon(index);
+    router.push(path);
+  };
+
   const [showClickedIcon, setShowClickedIcon] = useState<boolean>(true); // Control visibility of clicked icon
   const navRef = useRef<HTMLDivElement | null>(null); // Ref for the navigation container
   const indicatorRef = useRef<HTMLDivElement | null>(null); // Ref for the indicator
-  const [positions, setPositions] = useState<Position[]>([]); // Positions of the icons
+  const [positions, setPositions] = useState<Position[]>(() => {
+    if (typeof window !== "undefined") {
+      const storedPositions = localStorage.getItem("positions");
+      return storedPositions ? JSON.parse(storedPositions) : { left: 0, top: 0 };
+    }
+    return { left: 0, top: 0 };
+  });
+  // const [onPage, setOnPage] = useState<string>(
+  //   typeof window !== "undefined" ? localStorage.getItem("") || "" : ""
+  // );
   const [initialRender, setInitialRender] = useState<boolean>(true); // Track if it is the initial render
 
   // Example icons - replace with your actual icons
@@ -116,7 +131,7 @@ export default function GlobalNavbar() {
       {/* Active indicator */}
       <div
         ref={indicatorRef}
-        className="absolute w-[11vh] h-[15vh] z-0 transform-gpu"
+        className="z-0 absolute w-[11vh] h-[15vh] transform-gpu"
         style={{
           transform: positions[activeIcon]
             ? `translate(${positions[activeIcon].left}px, ${positions[activeIcon].top}px)`
@@ -133,11 +148,11 @@ export default function GlobalNavbar() {
       />
 
       {/* Navigation icons */}
-      <div className="items-center flex justify-around z-0">
+      <div className="z-0 flex justify-around items-center">
         {icons.map((icon, index) => (
           <button
             key={index}
-            className="nav-icon relative w-12 h-10 rounded-full flex items-center justify-center z-0 relative"
+            className="z-0 relative flex justify-center items-center rounded-full w-12 h-10 nav-icon"
             onClick={() => {
               setActiveIcon(index);
               router.push(`${icon.path}`);
@@ -149,13 +164,13 @@ export default function GlobalNavbar() {
                 alt={icon.alt}
                 width={60}
                 height={60}
-                className="w-10 h-10 md:w-12 md:h-12"
+                className="w-10 md:w-12 h-10 md:h-12"
               />
             )}
 
             {index === activeIcon && showClickedIcon && (
               <div
-                className="absolute z-20"
+                className="z-20 absolute"
                 style={{
                   animation: "fadeIn 0.2s ease-out",
                   position: "absolute",
