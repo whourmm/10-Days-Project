@@ -24,13 +24,10 @@ app.use(cors()); // Enable CORS
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
+
 app.use('/api/users', userRoutes);
 app.use('/api/comments',commentRoutes);
-
-app.use('/tarot', tarotRoutes);
-// Sample API query
-
-
+app.use('/api/tarot', tarotRoutes);
 app.use("/api/blogs", blogRoutes);
 
 // Start the server

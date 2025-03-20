@@ -5,5 +5,6 @@ const tarotController = require('../controllers/tarotController'); // Import the
 
 // Define the route for getting a random tarot card
 router.get('/random', tarotController.getRandomCard);
+router.get('/history', tarotController.getCardHistory);
 
 module.exports = router;
