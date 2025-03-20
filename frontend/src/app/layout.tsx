@@ -30,10 +30,12 @@ export default async function RootLayout({
   return (
     <html lang="th">
       {/* <NextAuthProvider session={nextAuthSession}> */}
-      <body className={` bg-main-background`}>
+      <body className={` bg-main-background ${athiti.className} ${frederickaTheGreat.className}`}>
         <div className="flex-1 mx-auto w-full">
           <GlobalNavbarDesktop />
-          {children}
+          <div className="px-5 mx-auto flex-1 w-full">
+            {children}
+          </div>
         </div>
       </body>
       {/* </NextAuthProvider> */}
