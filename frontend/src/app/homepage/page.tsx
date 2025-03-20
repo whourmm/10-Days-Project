@@ -9,5 +9,5 @@ export default function page() {
   // const { data: session } = useSession();
   //   if (!session || !session.user.token) return null;
 
-  return <main></main>;
+  return <main className=""></main>;
 }

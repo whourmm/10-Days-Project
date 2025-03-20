@@ -3,20 +3,20 @@ import path from "path";
 export const MenuItems = [
   {
     name: "Daily Tarot",
-    path: "/daily-tarot",
+    path: "/homepage/daily-tarot",
     icon: "/images/navbar/tarot.svg",
     icon_click: "/images/navbar/tarot_click.svg",
   },
   {
     name: "Community",
-    path: "/community",
-    icon: "/images/navbar/flower.svg",
-    icon_click: "/images/navbar/flower_click.svg",
+    path: "/homepage/community",
+    icon: path.resolve("/images/navbar/flower.svg"),
+    icon_click: path.resolve("images/navbar/flower_click.svg"),
   },
   {
     name: "History",
-    path: "/history",
-    icon: "/images/navbar/bee.svg",
-    icon_click: "/images/navbar/bee_click.svg",
+    path: "/homepage/history",
+    icon: path.resolve("/images/navbar/bee.svg"),
+    icon_click: path.resolve("images/navbar/bee_click.svg"),
   },
 ]

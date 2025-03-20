@@ -30,7 +30,7 @@ export default async function RootLayout({
   return (
     <html lang="th">
       {/* <NextAuthProvider session={nextAuthSession}> */}
-      <body className={`bg-main-background`}>
+      <body className={` bg-main-background`}>
         <div className="flex-1 mx-auto w-full">
           <GlobalNavbarDesktop />
           <div className="px-5 mx-auto flex-1 w-full">
