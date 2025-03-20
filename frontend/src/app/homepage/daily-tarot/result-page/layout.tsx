@@ -1,37 +1,29 @@
-import type { Metadata } from "next";
-import { Athiti, Fredericka_the_Great } from "next/font/google";
+"use client";
+
+import GlobalNavBar from "@/components/navbar/global_nav_bar";
 import GlobalNavbarDesktop from "@/components/navbar/global_nav_bar_desktop";
-import { getServerSession } from "next-auth/next";
-// import { authOptions } from "./api/auth/[...nextauth]/route";
+import { usePathname } from "next/navigation";
+import { Athiti } from "next/font/google";
 
 const athiti = Athiti({
   subsets: ["thai", "latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
 });
 
-const frederickaTheGreat = Fredericka_the_Great({
-  subsets: ["latin"],
-  weight: ["400"],
-});
-
-export const metadata: Metadata = {
-  title: "BeeLuck",
-  description: "",
-};
-
-export default async function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const nextAuthSession = await getServerSession(authOptions);
   return (
-    <html lang="th">
-      {/* <NextAuthProvider session={nextAuthSession}> */}
-      <body className={`${athiti.className}  bg-white`}>
-        <div className="w-full">{children}</div>
-      </body>
-      {/* </NextAuthProvider> */}
-    </html>
+    <div className={`${athiti.className} bg-white `}>
+      {/* Content container */}
+      <div className="relative p-2 bg-white ">{children}</div>
+
+      {/* Navigation bar fixed at bottom */}
+      <div className="bottom-0 z-50 fixed w-full sm:hidden right-0">
+        <GlobalNavBar />
+      </div>
+    </div>
   );
 }

@@ -14,8 +14,8 @@ export const MenuItems = [
     icon_click: path.resolve("images/navbar/flower_click.svg"),
   },
   {
-    name: "History",
-    path: "/homepage/history",
+    name: "user-profile",
+    path: "/homepage/user-profile",
     icon: path.resolve("/images/navbar/bee.svg"),
     icon_click: path.resolve("images/navbar/bee_click.svg"),
   },

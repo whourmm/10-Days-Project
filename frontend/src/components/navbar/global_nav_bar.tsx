@@ -51,7 +51,7 @@ export default function GlobalNavbar() {
   const icons: Icon[] = [
     { src: card, src_click: card_click, alt: "Cards", path: "daily-tarot" },
     { src: flower, src_click: flower_click, alt: "flower", path: "community" },
-    { src: bee, src_click: bee_click, alt: "bee", path: "history" },
+    { src: bee, src_click: bee_click, alt: "bee", path: "user-profile" },
   ];
 
   // Calculate positions on initial render
@@ -155,7 +155,8 @@ export default function GlobalNavbar() {
             className="z-0 relative relative flex justify-center items-center rounded-full w-12 h-10 nav-icon"
             onClick={() => {
               setActiveIcon(index);
-              router.push(`${icon.path}`);
+              router.push(`/homepage/${icon.path}`);
+              console.log(`${icon.path}`);
             }}
           >
             {index !== activeIcon && (

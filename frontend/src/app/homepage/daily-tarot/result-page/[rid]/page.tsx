@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import GlobalNavbar from "@/components/navbar/global_nav_bar";
 import test_card from "@public/images/tarot/ace-of-cups.png";
 
 export default function page({ params }: { params: { rid: string } }) {
@@ -29,7 +30,7 @@ export default function page({ params }: { params: { rid: string } }) {
 
   return (
     <div
-      className="flex flex-col items-center justify-center "
+      className="flex flex-col items-center justify-center bg-white  pb-[10vh]"
       style={{
         transition: "opacity 1.5s ease-in-out",
         opacity: opacity,
