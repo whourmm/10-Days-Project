@@ -2,10 +2,10 @@
 const express = require('express');
 const { createComment, getCommentsByBlogId, deleteComment } = require('../controllers/commentController.js');
 
-const router = express.Router();
+const router = express.Router({mergeParams : true});
 
 // POST request to create a comment
-router.post('/', createComment);
+router.post('/:blog_id', createComment);
 
 // GET request to fetch comments by blog_id
 router.get('/:blog_id', getCommentsByBlogId);

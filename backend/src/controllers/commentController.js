@@ -3,15 +3,32 @@ const supabase = require('../config/db.js');
 const Comment = require('../models/commentModel.js');
 
 const createComment = async (req, res) => {
-      const { content, blog_id, user_id } = req.body;
+    const { content } = req.body;
+    const { blog_id } = req.params;
   
-      try {  
-          const { data, error, status } = await supabase
-              .from('comment')
-              .insert([
-                  { content, blog_id, user_id }
-              ])
-              .single(); // Get the inserted comment
+    try {
+        const token = req.headers.authorization?.split(" ")[1]; 
+        if (!token) {
+            return res.status(401).json({ error: "Unauthorized: No token provided" });
+        }
+
+        // Validate session with Supabase
+        const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+        if (authError || !user) {
+            return res.status(401).json({ error: "Unauthorized: Invalid token" });
+        }
+
+        const { data: comment, error, status } = await supabase
+            .from('comment')
+            .insert([
+                { 
+                    content: content,
+                    blog_id: blog_id, 
+                    user_id: user.id
+                }
+            ])
+            .select()
+            .single(); // Get the inserted comment
   
           // Check if an error occurred during the insert
           if (error) {
@@ -23,7 +40,7 @@ const createComment = async (req, res) => {
               });
           }
   
-          return res.status(201).json(data);
+        return res.status(201).json(comment);
       } catch (error) {
           console.error('Unexpected Error:', error);
           return res.status(500).json({
