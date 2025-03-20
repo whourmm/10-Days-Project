@@ -19,8 +19,8 @@ const config: Config = {
       }
     },
       fontFamily: {
-        athiti: ["Athiti", "sans-serif"],
-        "fredericka-the-great": ["Fredericka the Great", "cursive"],
+        athiti: "Athiti",
+        "fredericka-the-great": "Fredericka the Great",
       },
       colors: {
         background: "var(--background)",
