@@ -74,17 +74,17 @@ async function createBlog(req, res) {
     }
 
     let imageUrl = null;
-    if (image && image.includes(",")) {
+    if (image) {
       // Convert base64 to buffer (if image is sent as base64)
       const buffer = Buffer.from(image.split(",")[1], "base64");
 
       // Upload image to Supabase Storage
-      const filePath = `blogs/${user.id}-${Date.now()}.png`; // Unique filename
+      const filePath = `blogs/${user.id}-${Date.now()}.jpg`; // Unique filename
       const { data: uploadData, error: uploadError } = await supabase
         .storage
         .from("blog-images") // Your storage bucket name
         .upload(filePath, buffer, {
-          contentType: "image/png",
+          contentType: "image/jpg",
         });
 
       if (uploadError) {
