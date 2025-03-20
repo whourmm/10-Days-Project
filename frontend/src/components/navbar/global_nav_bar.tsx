@@ -152,7 +152,7 @@ export default function GlobalNavbar() {
         {icons.map((icon, index) => (
           <button
             key={index}
-            className="z-0 relative relative flex justify-center items-center rounded-full w-12 h-10 nav-icon"
+            className="z-0 relative flex justify-center items-center rounded-full w-12 h-10 nav-icon"
             onClick={() => {
               setActiveIcon(index);
               router.push(`/homepage/${icon.path}`);

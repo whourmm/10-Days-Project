@@ -19,8 +19,8 @@ const config: Config = {
       }
     },
       fontFamily: {
-        athiti: ["Athiti", "sans-serif"],
-        "fredericka-the-great": ["Fredericka the Great", "cursive"],
+        athiti: "Athiti",
+        "fredericka-the-great": "Fredericka the Great",
       },
       colors: {
         background: "var(--background)",
@@ -38,6 +38,7 @@ const config: Config = {
         "raw-umber" : "#885E3C" 
       },
       backgroundImage: {
+        'desktop-background': "url('/svgs/bg-tile.svg')",
         'main-background': "url('/images/BackGround.svg')",
         'logo': "url('/images/Logo.svg')",
         'icon-background' : "url('url('/images/navbar/circle_bee.svg')')",

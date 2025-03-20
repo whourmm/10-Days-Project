@@ -10,7 +10,7 @@ export default function Home() {
   };
   return (
     <div className="flex flex-row h-[100vh]">
-      <div className="flex flex-col justify-around items-start gap-5 mx-5 my-10 w-full">
+      <div className="flex flex-col justify-around items-start gap-5 my-10 w-full max-w-screen-md mx-auto">
         <div className="">
           <Image
             src={logo}
